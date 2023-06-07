@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>性格診断テスト</title>
+</head>
+<body>
+  <h1>性格診断テスト</h1>
+  <form id="quizForm">
+    <!-- 質問と回答の入力フィールド -->
+    <form action="results.html" method="post" id="quizForm">
+        <h2>新しい環境や経験に対してどのように反応しますか？</h2>
+        <input type="radio" name="q1" value="1" required>積極的に受け入れる<br>
+        <input type="radio" name="q1" value="2">警戒しつつ受け入れる<br>
+        <input type="radio" name="q1" value="3">慎重に様子を見る<br>
+        <input type="radio" name="q1" value="4">心配して受け入れない<br>
+    
+        <h2>チームでの仕事が好きですか？</h2>
+        <input type="radio" name="q2" value="1" required>大好き<br>
+        <input type="radio" name="q2" value="2">好き<br>
+        <input type="radio" name="q2" value="3">どちらとも言えない<br>
+        <input type="radio" name="q2" value="4">好きではない<br>
+    
+        <h2>外向的な人との交流を楽しめますか？</h2>
+        <input type="radio" name="q3" value="1" required>とても楽しめる<br>
+        <input type="radio" name="q3" value="2">まあ楽しめる<br>
+        <input type="radio" name="q3" value="3">どちらとも言えない<br>
+        <input type="radio" name="q3" value="4">あまり楽しめない<br>
+    
+        <h2>自分の意見をはっきりと述べることができますか？</h2>
+        <input type="radio" name="q4" value="1" required>いつでもできる<br>
+        <input type="radio" name="q4" value="2">多くの場合できる<br>
+        <input type="radio" name="q4" value="3">たまにできる<br>
+        <input type="radio" name="q4" value="4">あまりできない<br>
+    
+        <h2>イベントやパーティーに行くことは好きですか？</h2>
+        <input type="radio" name="q5" value="1" required>大好き<br>
+        <input type="radio" name="q5" value="2">好き<br>
+        <input type="radio" name="q5" value="3">どちらとも言えない<br>
+    <input type="radio" name="q5" value="4">好きではない<br>
+    <br>
+    <input type="submit" value="診断する">
+  </form>
+
+  <div id="result" style="display: none;">
+    <h2>診断結果</h2>
+    <p id="resultText"></p>
+  </div>
+
+  <script>
+    // フォームの送信イベントのリスナーを追加
+    document.getElementById("quizForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // フォームの通常の送信をキャンセル
+
+      // 質問ごとの回答を取得
+      const answers = {
+        q1: document.querySelector('input[name="q1"]:checked').value,
+        q2: document.querySelector('input[name="q2"]:checked').value,
+        q3: document.querySelector('input[name="q3"]:checked').value,
+        q4: document.querySelector('input[name="q4"]:checked').value,
+        q5: document.querySelector('input[name="q5"]:checked').value
+      };
+
+      // 診断結果を計算
+      const result = calculateResult(answers);
+
+      // 結果を表示
+      showResult(result);
+    });
+
+    // 診断結果を計算する関数
+    function calculateResult(answers) {
+      // 診断結果のロジックを実装
+      // ここでは簡略化のため、回答の合計を計算するだけの例を示します
+      let total = 0;
+      for (let key in answers) {
+        total += parseInt(answers[key]);
+      }
+      return total;
+    }
+
+    // 診断結果を表示する関数
+    function showResult(result) {
+      const resultText = document.getElementById("resultText");
+
+      // 診断結果に応じてテキストを設定
+      if (result <= 10) {
+        resultText.textContent = "あなたは非常にポジティブな性格です！";
+      } else if (result <= 15) {
+        resultText.textContent = "あなたは前向きな性格です！";
+      } else if (result <= 20) {
+        resultText.textContent = "あなたは慎重な性格です！";
+      } else {
+        resultText.textContent = "あなたは内向的な性格です！";
+      }
+
+      // 結果を表示するための要素を表示
+      document.getElementById("result").style.display = "block";
+      document.getElementById("quizForm").style.display = "none";
+    }
+  </script>
+</body>
+</html>
