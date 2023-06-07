@@ -152,6 +152,7 @@
     <h2>診断結果</h2>
     <p id="resultText"></p>
     <img id="resultImage" src="" alt="診断結果の画像">
+    <button onclick="showForm()">戻る</button>
   </div>
 
   <script>
@@ -209,6 +210,14 @@
       // 結果を表示するための要素を表示
       document.getElementById("result").style.display = "block";
       document.getElementById("quizForm").style.display = "none";
+    }
+
+    function showForm() {
+      // フォームを表示する
+      document.getElementById("quizForm").style.display = "block";
+      
+      // 結果を非表示にする
+      document.getElementById("result").style.display = "none";
     }
   </script>
 </body>
